@@ -1,6 +1,6 @@
 # Publication, attribution and rights
 
-This repository is prepared as a public academic research companion by Ravindu Nawanjana. It does **not** claim endorsement by Yale School of the Environment, Eli Fenichel, Andie Creel, the journal or participating institutions.
+This repository is an independent academic research companion prepared by Ravindu Nawanjana. It does **not** claim endorsement by the journal or participating institutions.
 
 **Important pre-publication check:** The author-provided writing sample indicates a manuscript **under revision**; check journal posting rules, anonymity requirements and interview-consent terms before public release. The PDF contains an author name, academic email, manuscript status and quotations from interviews. Its inclusion here responds to the author's request to present the work; do not publish it without reading it first.
 
