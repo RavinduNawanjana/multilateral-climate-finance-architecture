@@ -65,8 +65,9 @@ jobs:
               temp.replace(path)
           else:
               document.close()
-              if replacement not in fitz.open(str(path))[0].get_text():
-                  raise RuntimeError("Writing sample PDF subtitle not recognised")
+              with fitz.open(str(path)) as existing:
+                  if replacement not in existing[0].get_text():
+                      raise RuntimeError("Writing sample PDF subtitle not recognised")
 
           with fitz.open(str(path)) as verified:
               full_text = "\n".join(p.get_text() for p in verified)
