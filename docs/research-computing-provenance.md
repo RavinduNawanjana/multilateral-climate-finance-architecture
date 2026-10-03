@@ -1,12 +1,20 @@
-# Source inspirations, attribution and implementation boundaries
+# Research-computing design and provenance boundaries
 
-The author supplied four research-code archives as **exemplars of practice**, not data sources for this project. The repo implements original R code for the MSc dataset.
+## Scope
 
-| Supplied reference | What it actually demonstrates | Practice adopted here |
+This research companion is an independent implementation using the author's MSc survey data, measurement documentation, source-reported SPSS summary statistics, and writing sample. It does not contain transplanted third-party scripts, datasets, graphics, exercises, or instructional text.
+
+## Reproducibility design decisions
+
+| Research requirement | Implementation | Audit boundary |
 | --- | --- | --- |
-| `wns_and_conservation_finance-main.zip` | `master_script.R` executes research scripts for paper figures and supplementary materials in an explicit order. Its README identifies Nakhmurina, Manning and Fenichel and describes reproducibility. | One ordered `analysis/master.R`, research-output traceability, paper-specific tables and plots. |
-| `pooled-saliva-testing-master.zip` | `paper_wrapper.R` connects statistical code to analysis and figure outputs; README describes the paper-replication role. | Top-level wrapper, separate computation and plotting, deterministic outputs. |
-| `capn_stuff-master.zip` | R/R Markdown computational exercises and groundwater applications; README distinguishes teaching exercises and sources. | Literate research narrative, inspectable functions, no opaque spreadsheet-only reporting. |
-| `AMES-master.zip` | R Markdown and project workflow exercises; example `ps1.Rmd`. | Quarto exposition, organized code and reproducible documentation. |
+| Repeatable execution | `analysis/master.R` runs input validation, numerical reproduction, sensitivity analysis, and reconciliation tests in an explicit order. | Success requires execution in an R-enabled environment. |
+| Transparent transformations | `R/functions.R` defines input and composite scoring rules; `data/metadata/` documents question-to-construct assignments. | The original respondent CSV is not silently modified. |
+| Traceability to reported results | `data/reference/spss_published_benchmarks.csv` freezes source-reported rounded values. | Matching reported rounding does not verify every proprietary SPSS setting. |
+| Testable statistical claims | `tests/run_tests.R` checks alphas, correlations, regression coefficients, and model fit. | Results describe cross-sectional associations, not causal effects. |
+| Inspectable research narrative | Quarto pages display methodology, limitations, empirical analysis, and a separately marked theoretical specification. | Dynamic theory parameters are not fitted from these survey responses. |
+| Publication boundaries | Ethics, consent, journal rights, and public data release require review before changing repository visibility. | This repository is not an institutional or journal-endorsed resource. |
 
-**No reference repository code, figures, datasets, exercises or writing have been transplanted into this package.** The source archives are not bundled. Their attribution is included solely to document research-computing design influences. This repository does not imply collaboration or endorsement.
+## Attribution policy
+
+The analytical code and explanatory text were independently authored for this repository. External literature and source evidence remain attributable through ordinary academic citation practices. A reproducibility design does not establish collaboration with, or approval from, any external research group.
