@@ -54,9 +54,9 @@ Output tables and figures are regenerated from the uploaded anonymized CSV, not 
 
 **Execution transparency:** A separate independent numerical audit against the original CSV was completed in the package-preparation environment. **R and Quarto are not installed in that environment**, so the R scripts and Quarto rendering have **not** been executed there; the GitHub workflow is configured to run the R tests and render Quarto on pushes. See [`docs/verification-status.md`](docs/verification-status.md).
 
-## Why this design
+## Reproducibility architecture
 
-The research-code examples provided from the Fenichel/Creel ecosystem show distinguishable, useful habits: `wns_and_conservation_finance` uses an ordered master script for paper and supplementary outputs; `pooled-saliva-testing` uses a wrapper to reproduce analysis and figures; `capn_stuff` and `AMES` use R/R Markdown exercises for readable computational explanation. We adopt the **structure**, not their source code, data, teaching content or results. See [`docs/research-computing-provenance.md`](docs/research-computing-provenance.md).
+This repository uses an ordered analysis wrapper, modular R functions, a documented codebook, frozen source-reported statistical benchmarks, automated reconciliation tests and Quarto research narratives. These are established research-computing practices applied independently to this MSc study; no third-party code or course materials have been incorporated. The design and its evidence boundaries are documented in [`docs/research-computing-provenance.md`](docs/research-computing-provenance.md).
 
 ## Material you can review
 
@@ -97,4 +97,4 @@ data/raw/survey_responses.csv        Original survey CSV, unchanged
 
 ## Attribution and rights
 
-Research author: **Ravindu Nawanjana**. No MIT or other blanket software licence has been added. See [`RIGHTS_AND_PUBLICATION.md`](RIGHTS_AND_PUBLICATION.md), including the distinction between the source bundle's CC BY 4.0 notice and this repository's publication choices. Do not infer endorsement by Yale, its researchers, the named financial institutions, or the journal.
+Research author: **Ravindu Nawanjana**. No MIT or other blanket software licence has been added. See [`RIGHTS_AND_PUBLICATION.md`](RIGHTS_AND_PUBLICATION.md), including the distinction between the source bundle's CC BY 4.0 notice and this repository's publication choices. The repository does not claim endorsement by the journal, participating institutions or any other organisation.
