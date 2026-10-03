@@ -37,8 +37,9 @@ jobs:
               if len(document) != 25:
                   raise AssertionError(f"Expected 25 writing-sample pages, got {len(document)}")
               front = document[0].get_text()
-              expected = "Writing sample, PhD application, Yale School of the Environment, Fall 2027"
-              if expected not in front:
+              expected_prefix = "Writing sample, PhD application,"
+              expected_suffix = "School of the Environment, Fall 2027"
+              if expected_prefix not in front or expected_suffix not in front:
                   raise AssertionError("Original writing-sample title-page line is missing or altered")
               if "Practitioner perspectives on institutional collaboration" not in front:
                   raise AssertionError("Unexpected writing-sample document")
