@@ -1,0 +1,122 @@
+---
+title: "Empirical reproducibility"
+subtitle: "Survey statistics reproduced from the original 103 × 32 CSV"
+---
+
+This report is regenerated from the anonymous response matrix. Reproduced values are distinguishable from source-reported SPSS targets, and all code is available in the repository. Data are cross-sectional five-point Likert responses from a selected sample of finance professionals, not a country panel.
+
+```{r}
+#| label: setup
+#| include: false
+source("analysis/master.R")
+source("R/functions.R")
+read_table <- function(name) {
+  utils::read.csv(file.path("outputs/tables", name), check.names = FALSE)
+}
+```
+
+## Data and measurement
+
+Composite scores use the unweighted **mean of each construct's stated items**. The codebook maps original V1–V32 codes to the SPSS construct abbreviations. The source file contains no missing item responses.
+
+```{r}
+#| label: tbl-validation
+#| tbl-cap: "Input validation: counts and checks"
+knitr::kable(read_table("input_validation.csv"), digits = 3)
+```
+
+```{r}
+#| label: tbl-descriptive
+#| tbl-cap: "Construct-level descriptive statistics"
+knitr::kable(read_table("construct_descriptives.csv"), digits = 3)
+```
+
+## Internal consistency
+
+Cronbach's alpha is calculated from item covariance/total-score variance, using raw unstandardized item responses. Alpha is a measure of internal consistency, not proof of validity or dimensionality.
+
+```{r}
+#| label: tbl-reliability
+#| tbl-cap: "Five construct scales: Cronbach alpha"
+knitr::kable(read_table("reliability.csv"), digits = 3)
+```
+
+## Bivariate associations
+
+Pearson correlations below describe sample associations between four independently defined composite predictors and the dependent composite *CFA*. Reported p-values assume the usual independent-observation sampling model; they should not be read as representative-population or causal evidence.
+
+```{r}
+#| label: tbl-correlations
+#| tbl-cap: "Pearson r against perceived architecture effectiveness"
+knitr::kable(read_table("pearson_correlations.csv"), digits = 3)
+```
+
+## Multiple regression
+
+The fitted *associational* model is
+
+$$
+\mathrm{CFA}_i = \beta_0 + \beta_1\mathrm{IC}_i + \beta_2\mathrm{BFD}_i +
+\beta_3\mathrm{PRA}_i + \beta_4\mathrm{TAFU}_i + u_i.
+$$
+
+Standardized coefficients are the unstandardized slopes multiplied by $s_{X_j}/s_Y$, so that values can be compared directly with S2's standardized coefficients. Intercept is not standardized.
+
+```{r}
+#| label: tbl-ols
+#| tbl-cap: "OLS slopes, conventional confidence intervals, and standardized coefficients"
+knitr::kable(read_table("ols_coefficients.csv"), digits = 4)
+```
+
+```{r}
+#| label: tbl-model
+#| tbl-cap: "OLS model summary"
+knitr::kable(read_table("model_summary.csv"), digits = 4)
+```
+
+## Source-reported SPSS comparison
+
+The results above are computed from the raw CSV. The independent R tests compare them with the rounded coefficients in S2 (recorded in `data/reference/spss_published_benchmarks.csv`). Neither the supplemental rounded results nor the private `.spv` are used as *inputs* to calculate the R estimates.
+
+```{r}
+#| label: tbl-spss
+#| tbl-cap: "Reference values as reported in the supplied supplementary material"
+bench <- utils::read.csv("data/reference/spss_published_benchmarks.csv")
+knitr::kable(bench[bench$metric %in% c("pearson_r", "standardized_beta",
+  "model_r_squared", "model_adjusted_r_squared"),
+  c("metric", "construct_or_variable", "reported_value")], digits = 3)
+```
+
+## Figures
+
+```{r}
+#| label: fig-distribution
+#| fig-cap: "Observed within-sample distributions of the five Likert composite means."
+#| out-width: "100%"
+knitr::include_graphics("figures/construct_distributions.png")
+```
+
+```{r}
+#| label: fig-regression
+#| fig-cap: "Standardized OLS slopes and conventional 95% confidence intervals; not causal estimates."
+#| out-width: "100%"
+knitr::include_graphics("figures/standardized_associations.png")
+```
+
+## Diagnostics and sensitivity
+
+The code exports variance inflation factors, influence-count summaries, and a leave-one-observation-out range for each slope. Individual-row influence diagnostics are stored locally and ignored by Git. These are *diagnostics*, not grounds to delete a respondent without a pre-specified rule.
+
+```{r}
+#| label: tbl-vif
+#| tbl-cap: "Variance inflation factors"
+knitr::kable(read_table("vif.csv"), digits = 3)
+```
+
+```{r}
+#| label: tbl-sensitivity
+#| tbl-cap: "Leave-one-respondent-out OLS sensitivity (unstandardized slopes)"
+knitr::kable(read_table("leave_one_out_summary.csv"), digits = 4)
+```
+
+If the optional R package `sandwich` is installed, `analysis/02_reproduce.R` also writes an **exploratory HC3 heteroskedasticity-robust** table; it is intentionally not presented as the original SPSS analysis or evidence of causal effects.

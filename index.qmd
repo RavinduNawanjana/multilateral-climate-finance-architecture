@@ -1,0 +1,19 @@
+---
+title: "Climate finance architecture"
+subtitle: "Research writing sample · Reproducible R analysis"
+---
+
+## Research companion
+
+This is a technical companion to Ravindu Nawanjana's MSc research on multilateral climate funds, blended finance and institutional collaboration across the Group of 77 and China.
+
+The underlying study combines **eight semi-structured interviews** with a cross-sectional survey of **103 financial-sector specialists**. Its theoretical contribution is the *Institutional Reinforcement Cycle* (IRC). The empirical and conceptual claims are deliberately kept separate.
+
+### Navigate
+
+- [Writing sample (PDF)](writing-sample/writing_sample.pdf): extended draft under journal revision.
+- [Quantitative reproduction](empirical-analysis.qmd): reliability, Pearson correlations, multiple regression, diagnostics and reproducibility checks.
+- [Methods and limits](methods.qmd): design and proper interpretation.
+- [IRC theory](theory.qmd): the model and why it cannot be fitted using these cross-sectional data alone.
+
+**Status:** research portfolio, not an institutional publication or endorsement. Confirm consent and journal policy before public posting of the manuscript PDF.

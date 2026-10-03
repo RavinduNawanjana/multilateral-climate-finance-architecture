@@ -1,0 +1,42 @@
+---
+title: "Methods, validity and limitations"
+---
+
+## Research design
+
+The author's submitted study is **qualitatively led mixed methods**. It combines eight semi-structured expert interviews and 103 survey responses from an explicitly defined group of sustainable-finance specialists. Interview content provides contextual interpretation, not independently reproducible interview-level evidence here because transcripts/recordings are not released.
+
+The supplied source materials describe 32 five-point Likert items, 7 items each for institutional collaboration, blended finance deployment, policy alignment and transparency, plus 4 items for perceived climate-finance architecture. The `data/metadata/item_codebook.csv` document records the original wording and a deterministic code-to-construct mapping.
+
+## Quantitative estimand and caveats
+
+This study's quantitative target is a **cross-sectional association between practitioners' perceptions**, not an estimate of actual finance deployment, additional climate capital mobilised or environmental outcomes. OLS uses means of ordinal items as approximately continuous indices, a common operational choice that nonetheless imposes scale/interval assumptions. The observed sample was not presented as a probability sample covering all G77 member countries and China.
+
+The exported CSV has no respondent IDs and no missing values. The sample is **103**, and there are **32** items. The public repository does not infer population representativeness, survey response bias or country-specific treatment effects from those 103 rows.
+
+## SPSS reproduction boundary
+
+The **original IBM SPSS analysis** includes reliability, descriptive statistics, correlations and regression; the source `.spv` also contains exploratory checks, factor analysis and bootstrapping. The public R pipeline intentionally covers only explicitly implemented computations. It does not claim equivalent factor-analysis extraction, rotation, coding decisions or bootstrapping unless separately reconstructed and checked. The `.spv` and `.sav` are preserved in a non-public evidence archive for future comparisons.
+
+The source `.sav` additionally contains saved diagnostics and a marker variable for common-method-bias work; those are **not present** in the 32-item public CSV and should not be recreated or claimed as equivalent without reviewing the SPSS syntax and the relevant operational definition.
+
+## Statistical checks
+
+| Component | Reproducible calculation | Interpretation constraint |
+| --- | --- | --- |
+| Alpha | Raw-score Cronbach's alpha | Internal consistency, not construct validation |
+| Item/construct descriptives | Mean, sample SD | Selected respondents only |
+| Correlation | Pearson r, two-sided p | No causality |
+| Regression | OLS, adjusted R², standardized beta | No causality or representative inference |
+| Multicollinearity | Auxiliary regression VIF | Diagnostic only |
+| Influence | Studentized residuals, Cook's D, leverage | Descriptive flags; no automatic deletion |
+| Sensitivity | Refit dropping each respondent | Stability illustration; no identification fix |
+| Optional HC3 | Robust covariance via `sandwich` | Changes uncertainty estimator, not estimand |
+
+## Qualitative coding
+
+The writing sample reports three themes: fragmented governance/institutional silos; catalytic limits of blended finance; regulatory dissonance. We **report that the manuscript says this**, without publishing transcript content, inventing quotations or claiming independent qualitative reproduction.
+
+## Reproducibility
+
+A master script runs every public-stage computation in order, source files are unchanged, derived outputs are programmatic, rounded benchmarks are separate, and tests enforce source-data consistency. A running R installation should produce session details in `outputs/session_info.txt` for version-sensitive comparison.

@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: _site
+  execute-dir: project
+  render:
+    - index.qmd
+    - empirical-analysis.qmd
+    - methods.qmd
+    - theory.qmd
+
+website:
+  title: "Climate Finance Architecture"
+  navbar:
+    left:
+      - text: "Overview"
+        href: index.qmd
+      - text: "Empirical reproducibility"
+        href: empirical-analysis.qmd
+      - text: "Methods and limits"
+        href: methods.qmd
+      - text: "IRC theory"
+        href: theory.qmd
+  page-footer:
+    left: "Ravindu Nawanjana · Research portfolio · Manuscript under revision"
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    code-summary: "Show reproducible R code"
+    fig-align: center
+    html-math-method: mathjax
+execute:
+  freeze: false
+  warning: false
+  message: false

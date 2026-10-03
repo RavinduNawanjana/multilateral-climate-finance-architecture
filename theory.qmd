@@ -1,0 +1,30 @@
+---
+title: "Institutional Reinforcement Cycle"
+subtitle: "Conceptual specification; not estimated with the 103-person survey"
+---
+
+## Formal model from the supplied Supplementary Material S1
+
+Let $E_t$ denote overall climate-finance effectiveness. Let $I_t$ (institutional collaboration), $P_t$ (policy/regulatory alignment), $B_t$ (blended-finance deployment) and $T_t$ (transparency/accountability) be nonnegative, comparably normalised determinants. The author's IRC formulation is:
+
+$$
+E_{t+1}=(1-\delta)E_t+\gamma(I_tP_tB_tT_t)^{\theta},
+$$
+
+where $0<\delta\le1$ is institutional depreciation, $\gamma>0$ is a catalytic multiplier and $\theta>0$ is the synergy elasticity. Writing $R_t=\gamma(I_tP_tB_tT_t)^\theta$ isolates the contemporaneous reinforcement term.
+
+## Interpreting the model
+
+- If any determinant is zero, the reinforcement term is zero and effectiveness follows the depreciation component.
+- When all inputs are strictly positive, cross-partial derivatives of $R_t$ are positive: $\partial^2R_t/(\partial X\partial Y)=\theta^2R_t/(XY)$.
+- The own marginal reinforcement derivative is $\partial R_t/\partial X = \theta R_t / X$. Under the model's common-normalisation and fixed-other-input assumptions, smaller positive $X$ has a larger marginal contribution, **not evidence that real-world improvements have identical costs**.
+- The reinforcement term is homogeneous of degree $4\theta$ in the four inputs. Joint proportional scaling yields more-than-proportional reinforcement when $\theta>1/4$.
+- At constant inputs, the model's steady state is $E^*=R/\delta$, with the path $E_t=E^*+(1-\delta)^t(E_0-E^*)$.
+
+An additive theoretical shock $\varepsilon_t$ can be included as $E_{t+1}=(1-\delta)E_t+R_t+\varepsilon_t$.
+
+## Crucial identification boundary
+
+**The cross-sectional 103-person Likert survey does not estimate $\delta$, $\gamma$ or $\theta$.** It does not observe $E_t$ through time, nor panel trajectories of the four determinants and realised outcomes. The empirical OLS coefficients reported elsewhere in this repository are **not** estimates of IRC structural parameters. A valid dynamic test would need longitudinal, comparable measures of inputs and realised outcomes, an explicit observational design and assumptions that address endogeneity and dynamics.
+
+The current work is a theory-building contribution informed by interviews, self-reported survey associations and related literature. It is not a fitted dynamic climate-finance model.

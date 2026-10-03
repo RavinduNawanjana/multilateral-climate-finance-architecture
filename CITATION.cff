@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If citing this research repository, refer to the author and the release version; the manuscript remains under revision."
+title: "Multilateral Climate Finance Architecture: R and Quarto Reproducible Research Companion"
+authors:
+  - family-names: "Nawanjana"
+    given-names: "Ravindu"
+version: "1.0.0"
+date-released: 2026-10-04
+type: software
+keywords:
+  - climate finance
+  - multilateral climate funds
+  - blended finance
+  - institutional economics
+  - reproducibility
