@@ -1,5 +1,9 @@
 # Writing sample provenance
 
-`writing_sample.pdf` is a **25-page PDF converted from the author-provided DOCX**. It is not presented as a final publication. The front matter identifies it as an extended version of a manuscript **under revision at Climate and Development**.
+`writing_sample.pdf` is the **original 25-page PDF** converted from the author-provided DOCX during portfolio preparation. Its original first-page application subtitle is retained verbatim, along with the manuscript's substantive text, figures, references, and appendices.
 
-Check blind-review policy, participant consent and author contact details before making the repository public. The first-page application-specific subtitle was replaced with neutral research-portfolio wording; the manuscript's substantive argument, data, findings and remaining pages are unchanged. This adjustment does not remove possible personal, consent-related, or journal-policy issues.
+The document is an **extended version of a manuscript under revision at Climate and Development**, not a final published article. The original editable DOCX remains with the author and in the separately stored private evidence bundle; it is not required for the R/Quarto computational workflow.
+
+**Editorial boundary:** GitHub Actions checks the PDF's title-page wording and page count but does not rewrite, redact, regenerate, or commit changes to it. Any later editorial revision should be made deliberately in the DOCX by the author, followed by a reviewed PDF export.
+
+Before making the repository public, confirm journal policy, participant permissions for quoted interviews, and whether contact details in this writing sample may be published.

@@ -2,136 +2,96 @@ name: Reproduce R and render Quarto
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: reproduce-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   reproduce:
+    name: Validate source, reproduce SPSS benchmarks, render Quarto
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Check out research repository
+      - name: Check out source files without write permissions
         uses: actions/checkout@v4
-      - name: Neutralise application-specific PDF subtitle and refresh manifest
-        if: github.event_name != 'pull_request'
+
+      - name: Verify untouched writing-sample PDF and record input hashes
         shell: bash
         run: |
-          python -m pip install 'pymupdf==1.26.5'
+          python -m pip install --disable-pip-version-check 'pymupdf==1.26.5'
           python - <<'PY'
           import hashlib
           import pathlib
           import subprocess
           import fitz
 
-          path = pathlib.Path("writing-sample/writing_sample.pdf")
-          document = fitz.open(str(path))
-          page = document[0]
-          unwanted = "Writing sample, PhD application,"
-          replacement = "Writing sample | Doctoral research portfolio | 2027"
-          matches = page.search_for(unwanted)
-          original_line = [
-              line
-              for line in page.get_text().splitlines()
-              if line.startswith(unwanted)
-          ]
-          if original_line:
-              if len(original_line) != 1:
-                  raise RuntimeError("Ambiguous application subtitle in PDF")
-              found = page.search_for(original_line[0])
-              if len(found) != 1:
-                  raise RuntimeError("Could not locate full subtitle as PDF text")
-              bbox = found[0]
-              area = fitz.Rect(bbox.x0 - 2, bbox.y0 - 1, bbox.x1 + 2, bbox.y1 + 2)
-              page.add_redact_annot(area, fill=(1, 1, 1))
-              page.apply_redactions(images=0, graphics=0, text=0)
-              page.insert_text(
-                  (bbox.x0, bbox.y1 - 3),
-                  replacement,
-                  fontsize=10,
-                  fontname="helv",
-                  color=(0, 0, 0),
-              )
-              metadata = document.metadata
-              metadata["subject"] = "Research writing sample"
-              document.set_metadata(metadata)
-              temp = path.with_name("writing_sample_revision.pdf")
-              document.save(str(temp), garbage=4, deflate=True, clean=True)
-              document.close()
-              temp.replace(path)
-          else:
-              document.close()
-              with fitz.open(str(path)) as existing:
-                  if replacement not in existing[0].get_text():
-                      raise RuntimeError("Writing sample PDF subtitle not recognised")
+          pdf = pathlib.Path("writing-sample/writing_sample.pdf")
+          with fitz.open(pdf) as document:
+              if len(document) != 25:
+                  raise AssertionError(f"Expected 25 writing-sample pages, got {len(document)}")
+              front = document[0].get_text()
+              expected = "Writing sample, PhD application, Yale School of the Environment, Fall 2027"
+              if expected not in front:
+                  raise AssertionError("Original writing-sample title-page line is missing or altered")
+              if "Practitioner perspectives on institutional collaboration" not in front:
+                  raise AssertionError("Unexpected writing-sample document")
 
-          with fitz.open(str(path)) as verified:
-              full_text = "\n".join(p.get_text() for p in verified)
-              if unwanted in full_text or replacement not in full_text:
-                  raise RuntimeError("PDF redaction verification failed")
-              if len(verified) != 25:
-                  raise RuntimeError("Unexpected writing sample page count")
-
-          protected = [
-              "Ya" + "le",
-              "Feni" + "chel",
-              "Cr" + "eel",
-          ]
-          for candidate in protected:
-              if candidate.casefold() in full_text.casefold():
-                  raise RuntimeError("Excluded proper name found in PDF")
-
-          files = subprocess.check_output(["git", "ls-files"], text=True).splitlines()
+          tracked = subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0")
+          out = pathlib.Path("outputs/integrity")
+          out.mkdir(parents=True, exist_ok=True)
           entries = []
-          for name in sorted(files):
-              if name == "MANIFEST.sha256":
+          for raw_name in tracked:
+              if not raw_name:
                   continue
-              source = pathlib.Path(name)
-              if not source.is_file():
-                  raise RuntimeError("Tracked file is absent: " + name)
-              entries.append(hashlib.sha256(source.read_bytes()).hexdigest() + "  " + name)
-          pathlib.Path("MANIFEST.sha256").write_text("\n".join(entries) + "\n", encoding="utf-8")
-          print("PDF content and research file hashes verified")
+              path = pathlib.Path(raw_name.decode("utf-8"))
+              if not path.is_file():
+                  raise FileNotFoundError(f"Tracked file missing from checkout: {path}")
+              entries.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.as_posix()}")
+          (out / "MANIFEST.sha256").write_text("\n".join(entries) + "\n", encoding="utf-8")
+          print(f"PDF title-page preserved; verified {len(tracked)-1} tracked source files.")
           PY
-      - name: Commit PDF subtitle update and checksum manifest
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          if ! git diff --quiet -- writing-sample/writing_sample.pdf MANIFEST.sha256; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add writing-sample/writing_sample.pdf MANIFEST.sha256
-            git commit -m "Neutralise writing sample subtitle and refresh checksums"
-            git push
-          fi
-      - name: Set up R
+
+      - name: Install R 4.4.3
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.4.3'
           use-public-rspm: true
-      - name: Install R dependencies
+
+      - name: Install research and rendering dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
             any::ggplot2
             any::knitr
+            any::rmarkdown
             any::sandwich
-      - name: Set up Quarto
+
+      - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      - name: Reproduce results and run R reconciliation tests
+
+      - name: Reproduce analysis and verify rounded SPSS benchmarks
         run: Rscript analysis/master.R
-      - name: Render Quarto research site
+
+      - name: Render the Quarto research companion
         run: quarto render
-      - name: Upload review-only reproduction artifact
+
+      - name: Attach reproducibility evidence (no publishing)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: climate-finance-r-quarto-reproduction
+          name: climate-finance-reproduction
+          if-no-files-found: warn
           path: |
             _site/
             outputs/tables/
+            outputs/integrity/
             outputs/session_info.txt
             figures/
+          retention-days: 30

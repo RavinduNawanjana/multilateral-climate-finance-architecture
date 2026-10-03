@@ -12,7 +12,7 @@ create_plots <- function(items, scores, coefficient_table) {
   g1 <- ggplot2::ggplot(vals, ggplot2::aes(x = construct, y = score)) +
     ggplot2::geom_boxplot(outlier.alpha = 0.30, width = 0.52, fill = "#b6c9d6", color = "#29495e") +
     ggplot2::coord_cartesian(ylim = c(1, 5)) +
-    ggplot2::labs(x = NULL, y = "Composite mean (1–5)",
+    ggplot2::labs(x = NULL, y = "Composite mean (1 to 5)",
       title = "Observed distribution of construct scores",
       subtitle = "103 specialist responses; means of their stated Likert items",
       caption = "Descriptive sample evidence, not population estimates") +

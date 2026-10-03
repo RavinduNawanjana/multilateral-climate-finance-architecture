@@ -1,6 +1,6 @@
 # Publication checklist — author review required
 
-Before uploading this *public* repository:
+Before changing this currently private repository to **public**:
 
 1. Confirm that publishing the manuscript **while under revision** is consistent with journal and any double-blind review requirements.
 2. Review the writing-sample PDF for interview quotes, potentially identifying institutional details, personal academic email and permission to publish participants' words.

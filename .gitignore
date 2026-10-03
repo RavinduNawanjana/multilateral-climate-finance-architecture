@@ -1,0 +1,19 @@
+# Local R and Quarto state
+.Rhistory
+.RData
+.Rproj.user/
+.quarto/
+_site/
+# Generated tables and graphics
+outputs/
+figures/*.png
+figures/*.pdf
+# Private/source binaries and archives (store separately)
+*.sav
+*.spv
+*.zip
+*.docx
+# Local artifacts
+*.log
+.DS_Store
+__pycache__/

@@ -35,7 +35,7 @@ The supplied S2 reports Pearson correlations with perceived architecture effecti
 2. From the **repository root**, install the minimum package requirements:
 
    ```r
-   install.packages(c("ggplot2", "knitr"))
+   install.packages(c("ggplot2", "knitr", "rmarkdown", "sandwich"))
    ```
 
 3. Run the complete analysis and built-in statistical checks:
@@ -50,9 +50,9 @@ The supplied S2 reports Pearson correlations with perceived architecture effecti
    quarto render
    ```
 
-Output tables and figures are regenerated from the uploaded anonymized CSV, not edited by hand. Quarto writes the rendered site to `_site/`. `analysis/master.R` produces `outputs/` and `figures/`. The workflow requires no external APIs, network downloads or personal credentials after installing R/Quarto packages.
+Output tables and figures are regenerated from the uploaded anonymized CSV, not edited by hand. Quarto writes the rendered site to `_site/`. `analysis/master.R` produces `outputs/` and `figures/`. GitHub Actions installs dependencies, validates that the original writing-sample PDF is intact, and attaches the generated site, aggregate tables, plots, R session information and a fresh SHA-256 manifest as a run artifact. The workflow has **read-only repository permissions** and never commits generated content or modifies the author's manuscript.
 
-**Execution transparency:** A separate independent numerical audit against the original CSV was completed in the package-preparation environment. **R and Quarto are not installed in that environment**, so the R scripts and Quarto rendering have **not** been executed there; the GitHub workflow is configured to run the R tests and render Quarto on pushes. See [`docs/verification-status.md`](docs/verification-status.md).
+**Execution transparency:** A separate independent numerical audit against the original CSV was completed in the package-preparation environment. **R and Quarto were unavailable in the original package-preparation environment.** Subsequently, GitHub Actions executed the R statistical pipeline and its benchmark checks successfully (2026-10-03). Quarto rendering initially failed because the workflow omitted the `rmarkdown` dependency; the revised read-only CI workflow installs it and verifies the complete build. See the live workflow run for the current outcome. See [`docs/verification-status.md`](docs/verification-status.md).
 
 ## Reproducibility architecture
 
@@ -60,7 +60,7 @@ This repository uses an ordered analysis wrapper, modular R functions, a documen
 
 ## Material you can review
 
-- [`writing-sample/writing_sample.pdf`](writing-sample/writing_sample.pdf): the **author-provided** 25-page writing sample converted to PDF; it is an **extended manuscript under revision**, not a final published article.
+- [`writing-sample/writing_sample.pdf`](writing-sample/writing_sample.pdf): the **original, unaltered** 25-page PDF writing sample exported from the author-provided DOCX, with its application-specific first-page wording intact; this is an **extended manuscript under revision**, not a final published article.
 - [`empirical-analysis.qmd`](empirical-analysis.qmd): executed tables/figures and transparent explanations when rendered in an R environment.
 - [`theory.qmd`](theory.qmd): the IRC formalisation, its mathematical interpretation and identification boundary.
 - [`methods.qmd`](methods.qmd): design, measurement, limitations, ethics and reproducibility.

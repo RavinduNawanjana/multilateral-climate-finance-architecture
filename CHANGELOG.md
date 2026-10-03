@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.2 — 2026-10-04
+
+- Restored the original unaltered 25-page PDF with its intended application subtitle from the initial Git commit.
+- Replaced the automated PDF rewriting and self-committing workflow with read-only document verification.
+- Fixed the missing `rmarkdown` dependency required for Quarto rendering.
+- Added tracked-file integrity generation as a GitHub Actions artifact instead of a stale committed checksum snapshot.
+- Restored a `.gitignore` for generated analysis, editor state and original private SPSS binaries.
+- Updated documentation with R test results observed in GitHub Actions and the distinction from final Quarto render status.
+
 ## v1.0.1 — 2026-10-04
 
 - Restored automated R verification and Quarto rendering through GitHub Actions.
