@@ -2,7 +2,7 @@
 
 **Institutional collaboration, blended finance, regulation and transparency in the Group of 77 and China**
 
-*R + Quarto reproducible research companion to an MSc study | Ravindu Nawanjana*
+*R + Quarto reproducible analysis of an MSc study | Ravindu Nawanjana*
 
 > **Research status.** This is a reproducibility portfolio, not a claim of publication, independent verification, causal identification or institutional endorsement. The associated manuscript, *Practitioner perspectives on institutional collaboration and multilateral climate funds in the Group of 77 and China*, is **under revision at Climate and Development**. The manuscript itself is not redistributed in this public repository.
 
@@ -52,11 +52,11 @@ The supplied S2 reports Pearson correlations with perceived architecture effecti
 
 Output tables and figures are regenerated from the uploaded anonymized CSV, not edited by hand. Quarto writes the rendered site to `_site/`. `analysis/master.R` produces `outputs/` and `figures/`. GitHub Actions installs dependencies, validates the required public reproducibility inputs, runs the statistical checks, renders Quarto, and attaches the generated site, aggregate tables, plots, R session information and a fresh SHA-256 manifest as a run artifact. The workflow has **read-only repository permissions** and never commits generated content.
 
-**Execution transparency:** A separate independent numerical audit against the original CSV was completed in the package-preparation environment. **R and Quarto were unavailable in the original package-preparation environment.** Subsequently, GitHub Actions executed the R statistical pipeline and its benchmark checks successfully (2026-10-03). Quarto rendering initially failed because the workflow omitted the `rmarkdown` dependency; the revised read-only CI workflow installs it and verifies the complete build. See the live workflow run for the current outcome. See [`docs/verification-status.md`](docs/verification-status.md).
+**Verification status:** GitHub Actions runs the R statistical pipeline, benchmark checks and Quarto render in a clean environment. See [`docs/verification-status.md`](docs/verification-status.md) for the current validation record.
 
 ## Reproducibility architecture
 
-This repository uses an ordered analysis wrapper, modular R functions, a documented codebook, frozen source-reported statistical benchmarks, automated reconciliation tests and Quarto research narratives. These are established research-computing practices applied independently to this MSc study; no third-party code or course materials have been incorporated. The design and its evidence boundaries are documented in [`docs/research-computing-provenance.md`](docs/research-computing-provenance.md).
+This repository uses an ordered analysis wrapper, modular R functions, a documented codebook, frozen source-reported statistical benchmarks, automated reconciliation tests and Quarto research narratives. The workflow uses modular R functions, explicit input validation, fixed benchmark tables, automated checks and Quarto reporting. The design and its evidence boundaries are documented in [`docs/research-computing-provenance.md`](docs/research-computing-provenance.md).
 
 ## Material you can review
 
@@ -95,4 +95,4 @@ data/raw/survey_responses.csv        Original survey CSV, unchanged
 
 ## Attribution and rights
 
-Research author: **Ravindu Nawanjana**. No MIT or other blanket software licence has been added. See [`RIGHTS_AND_PUBLICATION.md`](RIGHTS_AND_PUBLICATION.md), including the distinction between the source bundle's CC BY 4.0 notice and this repository's publication choices. The repository does not claim endorsement by the journal, participating institutions or any other organisation.
+Research author: **Ravindu Nawanjana**. No MIT or other blanket software licence has been added. See [`RIGHTS_AND_PUBLICATION.md`](RIGHTS_AND_PUBLICATION.md), including the file-level licensing and publication notes. The repository does not claim endorsement by the journal, participating institutions or any other organisation.
