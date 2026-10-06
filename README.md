@@ -2,9 +2,9 @@
 
 **Institutional collaboration, blended finance, regulation and transparency in the Group of 77 and China**
 
-*R + Quarto research companion to an MSc study and PhD writing sample | Ravindu Nawanjana*
+*R + Quarto reproducible research companion to an MSc study | Ravindu Nawanjana*
 
-> **Research status.** This is a reproducibility and writing-sample portfolio, not a claim of publication, independent verification, causal identification or institutional endorsement. The source article, *Practitioner perspectives on institutional collaboration and multilateral climate funds in the Group of 77 and China*, is described in the provided manuscript as **under revision at Climate and Development**. The full writing sample is marked accordingly.
+> **Research status.** This is a reproducibility portfolio, not a claim of publication, independent verification, causal identification or institutional endorsement. The associated manuscript, *Practitioner perspectives on institutional collaboration and multilateral climate funds in the Group of 77 and China*, is **under revision at Climate and Development**. The manuscript itself is not redistributed in this public repository.
 
 ## Research question
 
@@ -50,7 +50,7 @@ The supplied S2 reports Pearson correlations with perceived architecture effecti
    quarto render
    ```
 
-Output tables and figures are regenerated from the uploaded anonymized CSV, not edited by hand. Quarto writes the rendered site to `_site/`. `analysis/master.R` produces `outputs/` and `figures/`. GitHub Actions installs dependencies, validates that the original writing-sample PDF is intact, and attaches the generated site, aggregate tables, plots, R session information and a fresh SHA-256 manifest as a run artifact. The workflow has **read-only repository permissions** and never commits generated content or modifies the author's manuscript.
+Output tables and figures are regenerated from the uploaded anonymized CSV, not edited by hand. Quarto writes the rendered site to `_site/`. `analysis/master.R` produces `outputs/` and `figures/`. GitHub Actions installs dependencies, validates the required public reproducibility inputs, runs the statistical checks, renders Quarto, and attaches the generated site, aggregate tables, plots, R session information and a fresh SHA-256 manifest as a run artifact. The workflow has **read-only repository permissions** and never commits generated content.
 
 **Execution transparency:** A separate independent numerical audit against the original CSV was completed in the package-preparation environment. **R and Quarto were unavailable in the original package-preparation environment.** Subsequently, GitHub Actions executed the R statistical pipeline and its benchmark checks successfully (2026-10-03). Quarto rendering initially failed because the workflow omitted the `rmarkdown` dependency; the revised read-only CI workflow installs it and verifies the complete build. See the live workflow run for the current outcome. See [`docs/verification-status.md`](docs/verification-status.md).
 
@@ -60,7 +60,6 @@ This repository uses an ordered analysis wrapper, modular R functions, a documen
 
 ## Material you can review
 
-- [`writing-sample/writing_sample.pdf`](writing-sample/writing_sample.pdf): the **original, unaltered** 25-page PDF writing sample exported from the author-provided DOCX, with its application-specific first-page wording intact; this is an **extended manuscript under revision**, not a final published article.
 - [`empirical-analysis.qmd`](empirical-analysis.qmd): executed tables/figures and transparent explanations when rendered in an R environment.
 - [`theory.qmd`](theory.qmd): the IRC formalisation, its mathematical interpretation and identification boundary.
 - [`methods.qmd`](methods.qmd): design, measurement, limitations, ethics and reproducibility.
@@ -80,7 +79,6 @@ tests/run_tests.R                  Numeric reconciliation tests
 empirical-analysis.qmd             Quarto reproduction narrative
 methods.qmd                        Mixed-methods source boundaries
 theory.qmd                         IRC conceptual specification
-writing-sample/writing_sample.pdf  Author-provided extended writing sample
 outputs/                            R-generated, ignored derived tables
 figures/                            R-generated, ignored figures
 data/raw/survey_responses.csv        Original survey CSV, unchanged
@@ -92,8 +90,8 @@ data/raw/survey_responses.csv        Original survey CSV, unchanged
 - The study's **G77 and China** framing describes the respondent context; the 103-person sample should not be treated as representative of every member country or financial institution.
 - The IRC equation is theoretical and its depreciation, multiplier and synergy parameters **were not estimated** from this dataset.
 - SPSS output `.spv` and `.sav` are retained in a **separately packaged private evidence archive**, not silently discarded or recast as R-generated results.
-- The interview coding summary appears in the writing sample, but transcripts are not provided and **cannot be independently re-analysed here**.
-- Source metadata and publication status require the author's final check before placing a currently revised manuscript in a public repository.
+- The associated study reports a qualitative coding summary, but transcripts are not provided and **cannot be independently re-analysed here**.
+- The manuscript is intentionally not redistributed here; journal posting permissions and interview-quotation rights remain separate publication decisions.
 
 ## Attribution and rights
 

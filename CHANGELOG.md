@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.3 — 2026-10-07
+
+- Kept the intentionally deleted writing-sample directory out of the public repository.
+- Removed the obsolete CI dependency on `writing-sample/writing_sample.pdf`.
+- Replaced PDF-specific verification with checks for the required public data/code inputs plus a fresh tracked-file SHA-256 manifest.
+- Removed broken writing-sample links and updated public-facing documentation to reflect the manuscript boundary.
+- Retained the read-only R/Quarto reproducibility workflow and benchmark checks.
+
+
 ## v1.0.2 — 2026-10-04
 
 - Restored the original unaltered 25-page PDF with its intended application subtitle from the initial Git commit.

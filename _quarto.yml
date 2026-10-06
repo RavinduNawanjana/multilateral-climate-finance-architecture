@@ -21,7 +21,7 @@ website:
       - text: "IRC theory"
         href: theory.qmd
   page-footer:
-    left: "Ravindu Nawanjana · Research portfolio · Manuscript under revision"
+    left: "Ravindu Nawanjana · Reproducible research portfolio"
 
 format:
   html:

@@ -22,32 +22,30 @@ jobs:
       - name: Check out source files without write permissions
         uses: actions/checkout@v4
 
-      - name: Verify untouched writing-sample PDF and record input hashes
+      - name: Validate required public inputs and record tracked-file hashes
         shell: bash
         run: |
-          python -m pip install --disable-pip-version-check 'pymupdf==1.26.5'
           python - <<'PY'
           import hashlib
           import pathlib
           import subprocess
-          import fitz
 
-          pdf = pathlib.Path("writing-sample/writing_sample.pdf")
-          with fitz.open(pdf) as document:
-              if len(document) != 25:
-                  raise AssertionError(f"Expected 25 writing-sample pages, got {len(document)}")
-              front = document[0].get_text()
-              expected_prefix = "Writing sample, PhD application,"
-              expected_suffix = "School of the Environment, Fall 2027"
-              if expected_prefix not in front or expected_suffix not in front:
-                  raise AssertionError("Original writing-sample title-page line is missing or altered")
-              if "Practitioner perspectives on institutional collaboration" not in front:
-                  raise AssertionError("Unexpected writing-sample document")
+          required = [
+              pathlib.Path("data/raw/survey_responses.csv"),
+              pathlib.Path("data/metadata/item_codebook.csv"),
+              pathlib.Path("data/reference/spss_published_benchmarks.csv"),
+              pathlib.Path("analysis/master.R"),
+              pathlib.Path("tests/run_tests.R"),
+          ]
+          missing = [str(path) for path in required if not path.is_file()]
+          if missing:
+              raise FileNotFoundError("Required reproducibility inputs missing: " + ", ".join(missing))
 
           tracked = subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0")
           out = pathlib.Path("outputs/integrity")
           out.mkdir(parents=True, exist_ok=True)
           entries = []
+          verified = 0
           for raw_name in tracked:
               if not raw_name:
                   continue
@@ -55,8 +53,9 @@ jobs:
               if not path.is_file():
                   raise FileNotFoundError(f"Tracked file missing from checkout: {path}")
               entries.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.as_posix()}")
+              verified += 1
           (out / "MANIFEST.sha256").write_text("\n".join(entries) + "\n", encoding="utf-8")
-          print(f"PDF title-page preserved; verified {len(tracked)-1} tracked source files.")
+          print(f"Required public inputs present; hashed {verified} tracked files.")
           PY
 
       - name: Install R 4.4.3

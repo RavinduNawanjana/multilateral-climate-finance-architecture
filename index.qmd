@@ -1,6 +1,6 @@
 ---
 title: "Climate finance architecture"
-subtitle: "Research writing sample · Reproducible R analysis"
+subtitle: "Reproducible R analysis · Mixed-methods research companion"
 ---
 
 ## Research companion
@@ -11,9 +11,8 @@ The underlying study combines **eight semi-structured interviews** with a cross-
 
 ### Navigate
 
-- [Writing sample (PDF)](writing-sample/writing_sample.pdf): extended draft under journal revision.
 - [Quantitative reproduction](empirical-analysis.qmd): reliability, Pearson correlations, multiple regression, diagnostics and reproducibility checks.
 - [Methods and limits](methods.qmd): design and proper interpretation.
 - [IRC theory](theory.qmd): the model and why it cannot be fitted using these cross-sectional data alone.
 
-**Status:** research portfolio, not an institutional publication or endorsement. Confirm consent and journal policy before public posting of the manuscript PDF.
+**Status:** research portfolio, not an institutional publication or endorsement. The associated manuscript is not redistributed in this public repository.

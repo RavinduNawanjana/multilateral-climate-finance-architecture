@@ -2,7 +2,7 @@
 
 This repository is an independent academic research companion prepared by Ravindu Nawanjana. It does **not** claim endorsement by the journal or participating institutions.
 
-**Important pre-publication check:** The author-provided writing sample indicates a manuscript **under revision**; check journal posting rules, anonymity requirements and interview-consent terms before public release. The PDF contains an author name, academic email, manuscript status and quotations from interviews. Its inclusion here responds to the author's request to present the work; do not publish it without reading it first.
+**Manuscript boundary:** the associated manuscript is **under revision** and is intentionally not redistributed in this public repository. Any later public posting of a manuscript or writing sample should be reviewed separately for journal policy, anonymity requirements, interview-consent terms and personal metadata.
 
 The separately packaged private materials contain original IBM SPSS outputs (`.spv`) and dataset (`.sav`), source workbook and editable manuscript. Do **not** upload the private archive into a public GitHub repository without independently examining metadata and sharing permissions.
 

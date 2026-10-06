@@ -12,7 +12,7 @@ The first two GitHub Actions attempts **successfully completed** the following l
 - leave-one-respondent-out sensitivity analysis;
 - source-reported SPSS benchmark comparisons via `tests/run_tests.R`.
 
-The GitHub job logs explicitly reported: `All R data/alpha/correlation/regression reconciliation checks passed.` Those first two jobs nevertheless **failed while rendering Quarto**, because `rmarkdown` was absent from the installed R package list. The revised GitHub Actions workflow installs `rmarkdown`, reruns the full pipeline, and checks that the original unmodified writing-sample PDF retains its first-page subtitle. **The latest GitHub Actions run is the authoritative source for full render status**, not this static document.
+The GitHub job logs explicitly reported: `All R data/alpha/correlation/regression reconciliation checks passed.` Those first two jobs nevertheless **failed while rendering Quarto**, because `rmarkdown` was absent from the installed R package list. A later workflow revision installed `rmarkdown` and successfully completed the full R/Quarto build. After the writing-sample directory was intentionally removed on 2026-10-06, run #5 failed only because the workflow still required that deleted PDF. The workflow now validates the required public data/code inputs instead of requiring a manuscript file. **The latest GitHub Actions run is the authoritative source for current render status**, not this static document.
 
 ## What this repository does not verify
 

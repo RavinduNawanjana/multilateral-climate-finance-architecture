@@ -2,7 +2,7 @@
 
 ## Scope
 
-This research companion is an independent implementation using the author's MSc survey data, measurement documentation, source-reported SPSS summary statistics, and writing sample. It does not contain transplanted third-party scripts, datasets, graphics, exercises, or instructional text.
+This research companion is an independent implementation using the author's MSc survey data, measurement documentation and source-reported SPSS summary statistics. The associated manuscript/writing sample is not redistributed in this public repository. The repository does not contain transplanted third-party scripts, datasets, graphics, exercises, or instructional text.
 
 ## Reproducibility design decisions
 

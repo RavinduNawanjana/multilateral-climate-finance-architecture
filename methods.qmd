@@ -35,7 +35,7 @@ The source `.sav` additionally contains saved diagnostics and a marker variable 
 
 ## Qualitative coding
 
-The writing sample reports three themes: fragmented governance/institutional silos; catalytic limits of blended finance; regulatory dissonance. We **report that the manuscript says this**, without publishing transcript content, inventing quotations or claiming independent qualitative reproduction.
+The associated study reports three themes: fragmented governance/institutional silos; catalytic limits of blended finance; regulatory dissonance. We **report these as study-reported themes**, without publishing transcript content, inventing quotations or claiming independent qualitative reproduction.
 
 ## Reproducibility
 
