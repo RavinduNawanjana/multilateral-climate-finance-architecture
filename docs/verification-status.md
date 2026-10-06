@@ -1,8 +1,8 @@
 # Verification status
 
-## Independent preparation-stage validation
+## Data and numerical validation
 
-The source CSV contains **103 rows and 32 items**, in the original `V1`–`V32` order. All responses are integers between 1 and 5, with no missing cells. The questionnaire mapping was extracted from the author's Excel workbook, and an independent numerical audit reproduced the five reported reliability coefficients, four Pearson correlations, four standardized OLS slopes, model R-squared and adjusted R-squared to the source's published rounding.
+The source CSV contains **103 rows and 32 items**, in the original `V1`–`V32` order. All responses are integers between 1 and 5, with no missing cells. The questionnaire mapping is recorded in the repository codebook, and the numerical checks reproduce the five reported reliability coefficients, four Pearson correlations, four standardized OLS slopes, model R-squared and adjusted R-squared to the source's published rounding.
 
 ## GitHub Actions execution (2026-10-03)
 

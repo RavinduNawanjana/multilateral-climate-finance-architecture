@@ -9,4 +9,4 @@
 7. **Source reconciliation**: `tests/run_tests.R` checks numerical R output against source-supplement rounded values.
 8. **Presentation**: `empirical-analysis.qmd` executes the master script and presents tables and figures.
 
-The original SPSS `.spv`, `.sav`, original codebook workbook and editable writing sample are kept together in the separate private evidence archive. Raw data have not been modified to force a match to published figures.
+The original SPSS `.spv`, `.sav`, codebook workbook and editable manuscript are not included in the public repository. Raw data have not been modified to force a match to published figures.
