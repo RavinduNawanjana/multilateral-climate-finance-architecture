@@ -19,7 +19,7 @@ How do institutional collaboration, blended finance deployment, policy and regul
 | Constructs | IC (7 items), BFD (7), PRA (7), TAFU (7), CFA (4) |
 | Interview material | Eight semi-structured interviews; transcripts and recordings **not publicly released** |
 | Original quantitative analysis | IBM SPSS Statistics |
-| Reproducible quantitative implementation | R with a Quarto research companion |
+| Reproducible quantitative implementation | R with Quarto reporting |
 | Empirical estimand | Cross-sectional associations among **perception-based composite scores** |
 | Theory | Institutional Reinforcement Cycle (IRC): **conceptual, not dynamically estimated** |
 
